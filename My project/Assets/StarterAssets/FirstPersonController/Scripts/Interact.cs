@@ -11,10 +11,14 @@ namespace StarterAssets
         [SerializeField] Transform holdArea;
         private GameObject heldObj;
         private Rigidbody heldObjRB;
+        public Camera cam;
 
         [Header("Physics Parameters")]
         [SerializeField] public float pickupRange = 5.0f;
         [SerializeField] public float pickupForce = 150.0f;
+
+        [SerializeField] public float pickupBufferTime = 0.5f;
+        [SerializeField] private float pickupTimeOutDelta;
 
         private StarterAssetsInputs _input;
         // Start is called before the first frame update
@@ -27,6 +31,7 @@ namespace StarterAssets
         void Update()
         {
             interact();
+            cam = Camera.main;
         }
 
         public void interact()
@@ -36,29 +41,39 @@ namespace StarterAssets
                 Debug.Log("asdf");
             }
 
-            if (_input.pickup == true)
+            if (_input.pickup == true && (pickupTimeOutDelta <= 0))
             {
+
                 if (heldObj == null)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position,transform.TransformDirection(Vector3.forward), out hit, pickupRange))
+                    if (Physics.Raycast(cam.transform.position,cam.transform.TransformDirection(Vector3.forward), out hit, pickupRange))
                     {
                         //pickup obj
                         PickupObject(hit.transform.gameObject);
+                        
                     }
-                    else
-                    {
-                        //drop object
-                        DropObject();
-                    }
+                   
 
+                  
+                }
+                else
+                {
+                    //drop object
+                    DropObject();
                     
                 }
+             
 
+            }
+            else
+            {
+                pickupTimeOutDelta -= Time.deltaTime;
             }
             if (heldObj != null)
             {
                 //moveobject
+                MoveObject();
             }
         }
 
@@ -73,8 +88,9 @@ namespace StarterAssets
 
                 heldObjRB.transform.parent = holdArea;
                 heldObj = pickObj;
-            
+                pickupTimeOutDelta = pickupBufferTime;
             }
+
         }
 
         void DropObject()
@@ -88,11 +104,18 @@ namespace StarterAssets
                 heldObjRB.transform.parent = null;
                 heldObj = null;
 
-           
+                pickupTimeOutDelta = pickupBufferTime;
+
         }
         void MoveObject()
         {
-            if (Vector3.Distance)
+            if (Vector3.Distance(heldObj.transform.position, holdArea.position) > 0.1f)
+            {
+                Vector3 moveDirection = (holdArea.position - heldObj.transform.position);
+                heldObjRB.AddForce(moveDirection * pickupForce);
+            }
+
+
         }
     }
 }

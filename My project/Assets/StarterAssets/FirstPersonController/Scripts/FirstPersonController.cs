@@ -85,7 +85,6 @@ namespace StarterAssets
 				#endif
 			}
 		}
-
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -122,12 +121,6 @@ namespace StarterAssets
 		{
 			CameraRotation();
 		}
-
-		private void Interact()
-        {
-
-        }
-
 		private void GroundedCheck()
 		{
 			// set sphere position, with offset

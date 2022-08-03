@@ -43,8 +43,17 @@
                 },
                 {
                     "name": "Pickup",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "cac0ff86-a21b-459b-8361-ea3b478e0301",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "DShift",
+                    "type": "Value",
+                    "id": "5114ba8d-8d16-4092-821d-275af071fb88",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -232,10 +241,32 @@
                     "name": "",
                     "id": "1932e1bc-0acb-4251-947c-28db27bd4c02",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "Pickup",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "47247b47-6df2-4179-be01-0e018e7b4505",
+                    "path": "<Keyboard>/f",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "DShift",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "18554e2d-85b8-4457-8979-01e3ba58e07b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "DShift",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

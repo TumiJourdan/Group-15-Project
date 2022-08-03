@@ -13,6 +13,8 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool pickup;
+		public bool dshift;
+
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -49,6 +51,11 @@ namespace StarterAssets
 		{
 			PickupInput(value.isPressed);
 		}
+
+		public void OnDShift(InputValue value)
+        {
+			DShiftInput(value.isPressed);
+        }
 #endif
 
 
@@ -76,7 +83,10 @@ namespace StarterAssets
         {
 			pickup = newPickupState;
         }
-		
+		public void DShiftInput(bool newDShiftState)
+        {
+			dshift = newDShiftState;
+        }
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
